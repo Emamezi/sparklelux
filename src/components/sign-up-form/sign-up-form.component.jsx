@@ -5,6 +5,8 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 import FormInput from "../form-input/form-input.component";
+import "./sign-up-form.styles.scss";
+import Button from "../button/button.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -21,7 +23,9 @@ const SignUpForm = () => {
     // console.log(event.target);
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value }); //update form field in the form state proprty and value dynamically
+    console.log(formFields);
   };
+  //clear from field after submission
   const resetFormField = () => {
     setFormFields(defaultFormFields);
   };
@@ -53,7 +57,7 @@ const SignUpForm = () => {
     // const user = await createUserDocumentfromAuth()
   };
   return (
-    <div>
+    <div className="sign-up-container">
       <h1>Sign up with yoour email and password</h1>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -76,7 +80,6 @@ const SignUpForm = () => {
             value: email,
           }}
         />
-
         <FormInput
           label="Password"
           inputOptions={{
@@ -97,8 +100,7 @@ const SignUpForm = () => {
             value: confirmPassword,
           }}
         />
-
-        <button type="submit">Submit</button>
+        <Button type="submit">Sign up</Button>
       </form>
     </div>
   );
