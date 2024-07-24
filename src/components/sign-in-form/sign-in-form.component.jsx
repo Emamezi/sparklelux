@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   signInUserWithEmailAndPassword,
   signInWithGooglePopup,
@@ -7,6 +7,7 @@ import {
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.styles.scss";
+import { UserContext } from "../../contexts/user.context";
 
 const defaultFormField = {
   email: "",
@@ -16,6 +17,7 @@ const defaultFormField = {
 const SignInForm = () => {
   const [formField, setFormFields] = useState(defaultFormField);
   const { email, password } = formField;
+  const { setCurrentUser } = useContext(UserContext);
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
@@ -25,7 +27,6 @@ const SignInForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formField, [name]: value });
-    console.log(formField);
   };
   const resetFormField = () => {
     setFormFields(defaultFormField);
@@ -35,9 +36,10 @@ const SignInForm = () => {
     event.preventDefault();
     try {
       if (!email || !password) return;
-      const response = await signInUserWithEmailAndPassword(email, password);
+      const { user } = await signInUserWithEmailAndPassword(email, password);
+      setCurrentUser(user);
+
       resetFormField();
-      console.log(response);
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-credential user not found":
@@ -68,7 +70,7 @@ const SignInForm = () => {
             value: email,
           }}
         />
-        <FormInput
+        <FormInput //props=={label:"password", inputOptions:{type:"password", required: true}}
           label={"Password"}
           inputOptions={{
             type: "password",
