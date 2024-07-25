@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 // import { EmailAuthProvider, } from "firebase/auth/web-extension";
 
@@ -48,7 +49,7 @@ export const createUserDocumentfromAuth = async (
   //snapshot: check if there is an instance of the document that exist inside the db and data access
   const userSnapshot = await getDoc(userDocRef);
 
-  //check if snaphot exists, if not, create an instanc eof it
+  //check if snaphot exists, if not, create an instance of it
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -80,3 +81,6 @@ export const signInUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => {
   return await signOut(auth);
 };
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
