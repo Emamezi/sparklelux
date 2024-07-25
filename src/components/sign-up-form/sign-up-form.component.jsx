@@ -23,7 +23,6 @@ const SignUpForm = () => {
     // console.log(event.target);
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value }); //update form field in the form state proprty and value dynamically
-    console.log(formFields);
   };
   //clear from field after submission
   const resetFormField = () => {

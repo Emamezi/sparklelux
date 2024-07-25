@@ -8,7 +8,6 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-// import { EmailAuthProvider, } from "firebase/auth/web-extension";
 
 import {
   getFirestore,

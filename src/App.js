@@ -4,9 +4,7 @@ import { Route, Routes } from "react-router-dom";
 // import SignIn from "./routes/authentication/authentication.component";
 import Authentication from "./routes/authentication/authentication.component";
 
-const Shop = () => {
-  return <div>Shop now page</div>;
-};
+import Shop from "./routes/shop/shop.component";
 
 const App = () => {
   return (
