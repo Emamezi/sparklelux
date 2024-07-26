@@ -2,9 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import {
   createUserDocumentfromAuth,
   onAuthStateChangedListener,
-  signOutUser,
 } from "../utils/firebase/firebase.utils";
-import { signOut } from "firebase/auth";
 
 //actual value to access or default value
 export const UserContext = createContext({
@@ -26,7 +24,6 @@ export const UserProvider = ({ children }) => {
       }
 
       setCurrentUser(user);
-      // setCurrentUser(user);
     });
     return unsubscribe; //runs hwatever we return from the cb fn whenit unmounts
   }, []); //array of conditinon (dependency array) to trigegr rerender or rerun, empty arry--- > none
