@@ -7,7 +7,7 @@ import { CartContext } from "../../contexts/cart.context";
 
 const CartDropdowm = () => {
   const navigate = useNavigate();
-  const checkoutHandler = () => {
+  const goToCheckOutHandler = () => {
     navigate("/checkout");
   };
   const { cartItems } = useContext(CartContext);
@@ -18,7 +18,7 @@ const CartDropdowm = () => {
           <CartItem key={item.id} cartItem={item} />
         ))}
       </div>
-      <Button onClick={checkoutHandler}>Check Out</Button>
+      <Button onClick={goToCheckOutHandler}>Check Out</Button>
     </div>
   );
 };
