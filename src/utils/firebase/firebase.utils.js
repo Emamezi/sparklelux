@@ -14,6 +14,8 @@ import {
   getDoc, //get data
   setDoc, //set data
   doc, //gets an instance of the documents database
+  collection,
+  writeBatch,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -38,7 +40,21 @@ export const signInWithGooglePopup = () =>
 
 export const db = getFirestore(); //creating the db
 
-//
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
+};
+
 export const createUserDocumentfromAuth = async (
   userAuth,
   additionalInfo = {}
