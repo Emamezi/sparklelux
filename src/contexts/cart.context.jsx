@@ -72,8 +72,8 @@ export const CartProvider = ({ children }) => {
     setCartItems(clearCartItem(cartItems, cartItemToRemove));
   };
 
+  //number of cart items
   useEffect(() => {
-    console.log("relogging");
     const cartCount = cartItems.reduce(
       (total, cartItems) => total + cartItems.quantity,
       0
@@ -81,6 +81,7 @@ export const CartProvider = ({ children }) => {
     setCartCount(cartCount);
   }, [cartItems]);
 
+  // amoutn total for all cart items
   useEffect(() => {
     const newTotal = cartItems.reduce((acc, cartItem) => {
       return acc + cartItem.quantity * cartItem.price;
